@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import '../models/country_model.dart';
 import '../controllers/home_controller.dart';
@@ -14,15 +16,26 @@ class CountryDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(country.name),
+        iconTheme: const IconThemeData(
+          color: Color(0xFF295D9F),
+        ),
+        title: const Text("Country Details"),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+            final homeController = Get.find<HomeController>();
+            homeController.clearSearchAndReset();
+          },
+        ),
         actions: [
           Obx(() {
             final isFav = controller.isFavorite(country);
             return IconButton(
               icon: Icon(
                 isFav ? Icons.favorite : Icons.favorite_border,
-                color: isFav ? Colors.redAccent : Colors.white,
+                color: isFav ? Colors.redAccent : const Color(0xFF295D9F),
               ),
               onPressed: () => controller.toggleFavorite(country),
             );
@@ -33,11 +46,14 @@ class CountryDetailsPage extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Flag emoji
-            Text(
-              country.flag,
-              style: const TextStyle(fontSize: 64),
+            Center(
+              child: Text(
+                country.flag,
+                style: const TextStyle(fontSize: 64),
+              ),
             ),
             const SizedBox(height: 24),
             // White container for details
@@ -72,46 +88,47 @@ class CountryDetailsPage extends StatelessWidget {
                   _buildInfoRow("Region", country.region),
                   _buildInfoRow("Subregion", country.subregion),
                   const SizedBox(height: 24),
-                  Text(
-                    "Timezones",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  // Timezones wrapped in small containers
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: country.timezones.map((tz) {
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 4,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Text(
-                          tz,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey.shade800,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
                 ],
               ),
+            ),
+            Gap(30.h),
+            Text(
+              "Timezones",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            Gap(30.h),
+            // Timezones wrapped in small containers
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: country.timezones.map((tz) {
+                return Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 4,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    tz,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
           ],
         ),
@@ -123,23 +140,22 @@ class CountryDetailsPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             "$title:",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
-              color: Colors.grey.shade800,
+              color: Colors.black,
             ),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              value,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey.shade700,
-              ),
+          // const SizedBox(width: 12),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey.shade700,
             ),
           ),
         ],

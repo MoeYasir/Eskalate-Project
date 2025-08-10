@@ -1,4 +1,5 @@
 import 'package:eskalate_project/services/api_services.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -10,6 +11,7 @@ class HomeController extends GetxController {
   var filteredCountries = <CountryModel>[].obs;
   var favorites = <CountryModel>[].obs;
   var selectedIndex = 0.obs;
+  final TextEditingController searchController = TextEditingController();
 
   final ApiService _service = ApiService();
 
@@ -22,6 +24,13 @@ class HomeController extends GetxController {
 
   void changeTab(int index) {
     selectedIndex.value = index;
+  }
+
+  void clearSearchAndReset() {
+    filteredCountries.assignAll(countries);
+    searchController.clear();
+
+    // optionally notify UI of change if needed
   }
 
   void fetchCountries() async {
