@@ -48,5 +48,10 @@ A Flutter app that displays a list of countries fetched from an API, with search
 ### Notes
 
 The app uses GetX for state management and routing.
-Favorites are stored locally with SharedPreferences and persist across app restarts.
+Favori<img width="1920" height="1080" alt="Screenshot 2025-08-10 at 3 00 47 PM" src="https://github.com/user-attachments/assets/7a55e74b-ba87-412c-bfbc-eb5ec82eb831" />
+tes are stored locally with SharedPreferences and persist across app restarts.
 The API endpoint URL is configured inside ApiService (replace with your actual endpoint).
+
+<img width<img width="1920" height="1080" alt="Screenshot 2025-08-10 at 3 00 56 PM" src="https://github.com/user-attachments/assets/6535f328-be4e-450f-b4a7-bfbbd1311e8f" />
+="1920" height="1080" alt="Screenshot 2025-08-10 at 3 00 53 PM" src="https://github.com/user-attachments/assets/47d64843-cfaf-4789-b39f-a66706c25bac" />
+
