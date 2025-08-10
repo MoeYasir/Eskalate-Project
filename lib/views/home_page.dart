@@ -1,4 +1,5 @@
 import 'package:eskalate_project/controllers/home_controller.dart';
+import 'package:eskalate_project/controllers/theme_controller.dart';
 import 'package:eskalate_project/widgets/country_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,9 +11,19 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       final isHome = controller.selectedIndex.value == 0;
-
+      final themeController = Get.find<ThemeController>();
       return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: Obx(() => Icon(themeController.isDarkMode.value
+                  ? Icons.dark_mode
+                  : Icons.light_mode)),
+              onPressed: () {
+                themeController.toggleTheme();
+              },
+            ),
+          ],
           title: Text(isHome ? 'Home' : 'Favorites'),
           centerTitle: true,
           backgroundColor: const Color(0xFFE6F0FA),
@@ -41,9 +52,24 @@ class HomePage extends GetView<HomeController> {
                         controller: controller.searchController,
                         decoration: InputDecoration(
                           hintText: "Search countries...",
-                          prefixIcon: const Icon(Icons.search),
+                          hintStyle: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.black
+                                    : Colors.grey.shade500,
+                          ),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.black
+                                    : Colors.grey.shade500,
+                          ),
                           filled: true,
-                          fillColor: Colors.grey.shade200,
+                          fillColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.grey.shade100,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide.none,

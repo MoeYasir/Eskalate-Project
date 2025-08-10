@@ -20,7 +20,7 @@ class CountryCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surfaceVariant,
           borderRadius: BorderRadius.circular(12),
           boxShadow: const [
             BoxShadow(
@@ -38,7 +38,7 @@ class CountryCard extends StatelessWidget {
                 Container(
                   height: 80,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    color: Theme.of(context).colorScheme.surfaceVariant,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12),
                       topRight: Radius.circular(12),
@@ -73,15 +73,24 @@ class CountryCard extends StatelessWidget {
                 children: [
                   Text(
                     country.name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.black
+                            : Colors.grey.shade600,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
                   ),
                   SizedBox(
                     height: 25,
                   ),
                   Text(
                     "Population: \n ${country.population}",
-                    style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.black
+                          : Colors.grey.shade600,
+                    ),
                   ),
                 ],
               ),
