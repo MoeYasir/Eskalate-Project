@@ -78,7 +78,9 @@ class CountryCard extends StatelessWidget {
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15),
                   ),
-                  Gap(25.h),
+                  SizedBox(
+                    height: 25,
+                  ),
                   Text(
                     "Population: \n ${country.population}",
                     style: TextStyle(fontSize: 13, color: Colors.grey.shade600),

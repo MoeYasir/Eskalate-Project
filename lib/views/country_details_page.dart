@@ -91,7 +91,9 @@ class CountryDetailsPage extends StatelessWidget {
                 ],
               ),
             ),
-            Gap(30.h),
+            SizedBox(
+              height: 30,
+            ),
             Text(
               "Timezones",
               style: TextStyle(
@@ -100,7 +102,9 @@ class CountryDetailsPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            Gap(30.h),
+            SizedBox(
+              height: 30,
+            ),
             // Timezones wrapped in small containers
             Wrap(
               spacing: 8,
